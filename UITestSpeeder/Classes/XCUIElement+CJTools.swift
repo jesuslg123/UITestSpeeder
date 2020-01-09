@@ -12,11 +12,11 @@ import XCTest
 public extension XCUIElement {
     
     // MARK: - Actions
-    public func tapOnCell(index: UInt) {
+    func tapOnCell(index: Int) {
         self.cells.element(boundBy: index).coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
     }
     
-    public func scrollToElement(element: XCUIElement) {
+    func scrollToElement(element: XCUIElement) {
         while !element.visible() {
             swipeUp()
         }
@@ -30,7 +30,7 @@ public extension XCUIElement {
         }
     }
     
-    public func visible() -> Bool {
+    func visible() -> Bool {
         guard self.exists && !self.frame.isEmpty else { return false }
         return XCUIApplication().windows.element(boundBy: 0).frame.contains(self.frame)
     }

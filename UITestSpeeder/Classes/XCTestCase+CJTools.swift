@@ -10,12 +10,12 @@ import XCTest
 
 public extension XCTestCase {
     
-    public func waitForExist(object:Any, timeout:ExpectationTimeout = .Default, file:String=#file, line:UInt=#line, continueIfFail: Bool = false){
+    func waitForExist(object:Any, timeout:ExpectationTimeout = .Default, file:String=#file, line:UInt=#line, continueIfFail: Bool = false){
         self.expectation(for: NSPredicate(format: "exists = 1"), evaluatedWith: object)
         self.waitForExpectations(timeout: timeout.rawValue) { (error) in
             if (error != nil) {
                 let messsage = "Failed to find \(object) after \(timeout.rawValue) seconds"
-                self.recordFailure(withDescription: messsage, inFile: file, atLine: line, expected: true)
+                self.recordFailure(withDescription: messsage, inFile: file, atLine: Int(line), expected: true)
                 if (!continueIfFail) {
                     XCTFail()
                 }
